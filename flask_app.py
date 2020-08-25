@@ -23,4 +23,6 @@ def health_check():
 def myconverter(o):
     if isinstance(o, datetime.datetime):
         return o.__str__()
- 
+
+if __name__ == "__main__":
+    app.run(port=8080, host="0.0.0.0")
