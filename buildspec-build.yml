@@ -1,0 +1,27 @@
+version: 0.2
+
+#configure the environment variables example git lab private token
+#we may keep the secret it the azure key vault or aws systems manager
+
+phases:
+  install:
+    runtime-version:
+      python: 3
+    commands:
+      - python3 -m pip install --upgrade pip
+      - install flask
+  build:
+    commands:
+      - set FLASK_APP=flask_app.py
+      - flask run
+  post_build:
+    commands:
+      - #we can run those commands in order or have a script in our repo and call the script with the git private token ex:- wget -q -o scriptname and the url
+      - #!bin/bash
+      - file="manifest.json"
+      - version=$(jq -r ".version" manifest.json)
+      - new_version=$(semver -i patch $version) #it will update the version patch
+      - sed -i "s|$version|$new_version|g" "$file" ##it will update the version in manifest.json every time this script runs
+      - #if you want to commit these changes you can add git stages to merge these chnages to the master repository
+    finally:
+      - echo "build ended on $(date)"

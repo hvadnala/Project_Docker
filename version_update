@@ -1,0 +1,11 @@
+#!bin/bash
+
+file="manifest.json"
+
+version=$(jq -r ".version" manifest.json)
+
+new_version=$(semver -i patch $version) #it will update the version patch
+
+sed -i "s|$version|$new_version|g" "$file" ##it will update the version in manifest.json every time this script runs
+
+#if you want to commit these changes you can add git stages to merge these chnages to the master repository
