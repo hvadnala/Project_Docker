@@ -5,7 +5,9 @@ With health endpoints returns status, version and uptime.
 
 # 3) What other information would you add to health endpoint json object in step 2?
 ```
-	  Other information I would like to add is response time, Ping. Also check dependent services like cache, database for the Url. This additional information can be helpful for the engineers.  
+	  Other information I would like to add is response time, Ping.
+	  Also check dependent services like cache, database for the Url.
+	  This additional information can be helpful for the engineers.  
 ```
 # 4) Create a docker file to build, package, deploy, and run this application locally with Docker.
 ```
